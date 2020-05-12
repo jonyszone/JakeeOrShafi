@@ -3,7 +3,7 @@ package shafi.example.jakeeorshafi;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
+import androidx.gridlayout.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void tapImageView(View imageView) {
         ImageView tapImageView = (ImageView) imageView;
-        int tiTag =  Integer.parseInt(tapImageView.getTag().toString());
-        if (playerChoices[tiTag] == Player.No && gameOver == false) {
+        int tiTag = Integer.parseInt(tapImageView.getTag().toString());
+        if (playerChoices[tiTag] == Player.No && !gameOver) {
             tapImageView.setTranslationX(-2000);
 
 
@@ -87,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
     }
     //Method fof Play  again
     private void resetThegame(){
-        for (int index = 0; index<gridLayout.getChildCount();index++){
+        for (int index = 0; index < gridLayout.getChildCount();index++){
             ImageView imageView = (ImageView) gridLayout.getChildAt(index);
             imageView.setImageDrawable(null);
+            imageView.setAlpha(0.4f);
         }
 
         currentPlayer = Player.ONE;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         playerChoices [8] = Player.No;
 
         gameOver = false;
+        btnAgin.setVisibility(View.INVISIBLE);
 
     }
 }
